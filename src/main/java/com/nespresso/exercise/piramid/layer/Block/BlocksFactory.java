@@ -6,7 +6,7 @@ import java.util.List;
 public class BlocksFactory {
     private static final int SLAVES_PER_BLOCK = 50;
 
-    static Blocks createBlocks(int slaves, int anks) {
+    public static Blocks createBlocks(int slaves, int anks) {
         int blockNumber = slaves / SLAVES_PER_BLOCK;
         int anksPerBlock = anks / blockNumber;
         if (anksPerBlock >= 2) {
