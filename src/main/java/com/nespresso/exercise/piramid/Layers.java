@@ -9,31 +9,19 @@ import java.util.regex.Pattern;
 public class Layers {
     private final static Pattern pattern = Pattern.compile("(\\d*) Slaves, (\\d*) Anks");
     private List<Layer> layers;
-
+    private AddLayerStrategy addLayerStrategy;
     public Layers() {
         this.layers = new ArrayList<>();
     }
 
     void addLayer(String s) {
         Matcher matcher = pattern.matcher(s);
-        while (matcher.find()) {
+        if (matcher.find()) {
             int slaves = Integer.parseInt(matcher.group(1));
             int anks = Integer.parseInt(matcher.group(2));
-            Layer layer = new Layer(slaves, anks);
-            if (!this.layers.isEmpty()) {
-                Layer lastLayer = this.layers.get(this.layers.size() - 1);
-                if (layer.length() > lastLayer.length()) {
-                    this.layers.remove(this.layers.size() - 1);
-                    this.layers.add(layer);
-                } else if (layer.length() == lastLayer.length() && layer.hasSameOrBetterQualityThan(lastLayer)) {
-                    this.layers.remove(this.layers.size() - 1);
-                    this.layers.add(layer);
-                } else {
-                    this.layers.add(layer);
-                }
-            }else {
-                this.layers.add(layer);
-            }
+            Layer newLayer = new Layer(slaves, anks);
+            this.addLayerStrategy = AddLayerStrategyFactory.createAddLayerStrategy(this.layers,newLayer);
+            this.addLayerStrategy.addLayer(this.layers, newLayer);
         }
     }
 
