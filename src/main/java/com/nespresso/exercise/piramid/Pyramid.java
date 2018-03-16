@@ -1,5 +1,7 @@
 package com.nespresso.exercise.piramid;
 
+import com.nespresso.exercise.piramid.layer.Layers;
+
 public class Pyramid {
     private Layers layers;
 
@@ -12,6 +14,6 @@ public class Pyramid {
     }
 
     public String print() {
-        return this.layers.print();
+        return this.layers.draw();
     }
 }

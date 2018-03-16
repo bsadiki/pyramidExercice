@@ -1,4 +1,4 @@
-package com.nespresso.exercise.piramid;
+package com.nespresso.exercise.piramid.layer;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ public class AddLayerStrategyFactory {
         if (!layers.isEmpty()) {
             Layer lastLayer = layers.get(layers.size() - 1);
             if (newLayer.length() > lastLayer.length()) {
-                return new CollapceAndAddLayerStrategy();
+                return new CollapseAndAddLayerStrategy();
             } else if (newLayer.length() == lastLayer.length() && newLayer.hasSameOrBetterQualityThan(lastLayer)) {
-                return new CollapceAndAddLayerStrategy();
+                return new CollapseAndAddLayerStrategy();
             } else {
                 return new AddLayerStrategyImpl();
             }

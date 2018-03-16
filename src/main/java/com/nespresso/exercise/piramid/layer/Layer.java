@@ -1,4 +1,7 @@
-package com.nespresso.exercise.piramid;
+package com.nespresso.exercise.piramid.layer;
+
+import com.nespresso.exercise.piramid.layer.Block.Blocks;
+import com.nespresso.exercise.piramid.layer.Block.BlocksFactory;
 
 public class Layer {
     private final Blocks blocks;

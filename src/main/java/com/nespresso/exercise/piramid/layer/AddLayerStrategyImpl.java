@@ -1,4 +1,4 @@
-package com.nespresso.exercise.piramid;
+package com.nespresso.exercise.piramid.layer;
 
 import java.util.List;
 

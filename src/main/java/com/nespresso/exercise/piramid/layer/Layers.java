@@ -1,31 +1,32 @@
-package com.nespresso.exercise.piramid;
+package com.nespresso.exercise.piramid.layer;
+
+import com.nespresso.exercise.piramid.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class Layers {
-    private final static Pattern pattern = Pattern.compile("(\\d*) Slaves, (\\d*) Anks");
+public class Layers implements Drawable {
     private List<Layer> layers;
     private AddLayerStrategy addLayerStrategy;
+
     public Layers() {
         this.layers = new ArrayList<>();
     }
 
-    void addLayer(String s) {
-        Matcher matcher = pattern.matcher(s);
-        if (matcher.find()) {
-            int slaves = Integer.parseInt(matcher.group(1));
-            int anks = Integer.parseInt(matcher.group(2));
-            Layer newLayer = new Layer(slaves, anks);
-            this.addLayerStrategy = AddLayerStrategyFactory.createAddLayerStrategy(this.layers,newLayer);
+    public void addLayer(String s) {
+        Layer newLayer = LayerFactory.createLayer(s);
+        if(newLayer!=null){
+            this.addLayerStrategy = AddLayerStrategyFactory.createAddLayerStrategy(this.layers, newLayer);
             this.addLayerStrategy.addLayer(this.layers, newLayer);
         }
     }
 
-    public String print() {
+    private int baseLength() {
+        return layers.get(0).length();
+    }
+
+    @Override
+    public String draw() {
         StringBuilder pyramidDrawBuilder = new StringBuilder();
         ListIterator<Layer> layerIterator = this.layers.listIterator();
         int previousLineLength = 0;
@@ -37,9 +38,5 @@ public class Layers {
                 pyramidDrawBuilder.append("\n");
         }
         return pyramidDrawBuilder.reverse().toString();
-    }
-
-    private int baseLength() {
-        return layers.get(0).length();
     }
 }
