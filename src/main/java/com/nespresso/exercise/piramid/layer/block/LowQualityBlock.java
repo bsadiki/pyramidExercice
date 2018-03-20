@@ -1,4 +1,4 @@
-package com.nespresso.exercise.piramid.layer.Block;
+package com.nespresso.exercise.piramid.layer.block;
 
 public class LowQualityBlock implements Block {
     @Override

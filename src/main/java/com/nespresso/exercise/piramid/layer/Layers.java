@@ -1,6 +1,8 @@
 package com.nespresso.exercise.piramid.layer;
 
 import com.nespresso.exercise.piramid.Drawable;
+import com.nespresso.exercise.piramid.layer.addstrategy.AddLayerStrategy;
+import com.nespresso.exercise.piramid.layer.addstrategy.AddLayerStrategyFactory;
 
 import java.util.ArrayList;
 import java.util.List;

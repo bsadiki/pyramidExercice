@@ -1,7 +1,7 @@
 package com.nespresso.exercise.piramid.layer;
 
-import com.nespresso.exercise.piramid.layer.Block.Blocks;
-import com.nespresso.exercise.piramid.layer.Block.BlocksFactory;
+import com.nespresso.exercise.piramid.layer.block.Blocks;
+import com.nespresso.exercise.piramid.layer.block.BlocksFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

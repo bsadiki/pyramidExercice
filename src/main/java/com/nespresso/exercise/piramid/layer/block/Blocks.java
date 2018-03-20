@@ -1,4 +1,4 @@
-package com.nespresso.exercise.piramid.layer.Block;
+package com.nespresso.exercise.piramid.layer.block;
 
 import com.nespresso.exercise.piramid.Drawable;
 
@@ -7,7 +7,7 @@ import java.util.List;
 public class Blocks implements Drawable {
     private final List<Block> blocks;
 
-    public Blocks(List<Block> blocks) {
+    Blocks(List<Block> blocks) {
         this.blocks = blocks;
     }
 

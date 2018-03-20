@@ -1,11 +1,11 @@
 package com.nespresso.exercise.piramid.layer;
 
-import com.nespresso.exercise.piramid.layer.Block.Blocks;
+import com.nespresso.exercise.piramid.layer.block.Blocks;
 
 public class Layer {
     private final Blocks blocks;
 
-    public Layer(Blocks blocks) {
+    Layer(Blocks blocks) {
         this.blocks = blocks;
     }
 

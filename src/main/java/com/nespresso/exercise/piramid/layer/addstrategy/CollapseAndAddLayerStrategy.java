@@ -1,4 +1,6 @@
-package com.nespresso.exercise.piramid.layer;
+package com.nespresso.exercise.piramid.layer.addstrategy;
+
+import com.nespresso.exercise.piramid.layer.Layer;
 
 import java.util.List;
 
