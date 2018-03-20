@@ -1,27 +1,50 @@
 package com.nespresso.exercise.piramid.layer;
 
 import com.nespresso.exercise.piramid.layer.Block.Blocks;
-import com.nespresso.exercise.piramid.layer.Block.BlocksFactory;
 
 public class Layer {
     private final Blocks blocks;
 
-    public Layer(int slaves, int anks) {
-        blocks = BlocksFactory.createBlocks(slaves, anks);
+    public Layer(Blocks blocks) {
+        this.blocks = blocks;
     }
 
-    String draw(int baseLength, int previousLayerLength) {
+    public boolean canHold(Layer layer) {
+        return this.length() > layer.length()
+                || (this.length() == layer.length() && this.hasBetterQualityThan(layer));
+    }
+
+    private int length() {
+        return this.blocks.length();
+    }
+
+    private boolean hasBetterQualityThan(Layer layer) {
+        return ((this.isAHighQualityLayer() && !layer.isAHighQualityLayer()));
+    }
+
+
+    private boolean isAHighQualityLayer() {
+        return (blocks.isAHighQualityBlock());
+    }
+
+    String draw(Layer baseLayer, Layer previousLayer) {
         StringBuilder layerDrawBuilder = new StringBuilder();
-        int lengthDifferenceWithPreviousLayer = Math.max(0, previousLayerLength - this.length());
-        int lengthDifferenceWithBase = Math.max(0, baseLength - this.length());
+        int lengthDifferenceWithPreviousLayer = lengthDifferenceWithPreviousLayer(previousLayer);
+        int lengthDifferenceWithBase = lengthDifferenceWithBase(baseLayer);
         layerDrawBuilder.append(extraLine(lengthDifferenceWithPreviousLayer, lengthDifferenceWithBase));
         layerDrawBuilder.append(blocks.draw());
         layerDrawBuilder.append(extraLine(lengthDifferenceWithPreviousLayer, lengthDifferenceWithBase).reverse());
         return layerDrawBuilder.toString();
     }
 
-    int length() {
-        return blocks.length();
+    private int lengthDifferenceWithPreviousLayer(Layer previousLayer) {
+        if (previousLayer != null)
+            return Math.max(0, previousLayer.length() - this.length());
+        return 0;
+    }
+
+    private int lengthDifferenceWithBase(Layer baseLayer) {
+        return Math.max(0, baseLayer.length() - this.length());
     }
 
     private StringBuilder extraLine(int lengthDifferenceWithPreviousLayer, int lengthDifferenceWithBase) {
@@ -33,19 +56,5 @@ public class Layer {
             extraLineBuilder.append("_");
         }
         return extraLineBuilder;
-    }
-
-    boolean hasSameOrBetterQualityThan(Layer layer) {
-        return ((this.isAHighQualityLayer() && !layer.isAHighQualityLayer())
-                || hasSameQuality(layer)
-        );
-    }
-
-    private boolean hasSameQuality(Layer layer) {
-        return ((this.isAHighQualityLayer() && layer.isAHighQualityLayer()) || (!this.isAHighQualityLayer() && !layer.isAHighQualityLayer()));
-    }
-
-    private boolean isAHighQualityLayer() {
-        return (blocks.isAHighQualityBlock());
     }
 }
